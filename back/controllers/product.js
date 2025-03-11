@@ -5,7 +5,6 @@ class ProductController {
 
     async CreateProduct(req, res) {
 
-
         if(!req.body.name || !req.body.price || !req.body.image) {
             return res.status(400).json({
                 message: "Missing required fields",
@@ -66,27 +65,25 @@ class ProductController {
     }
 
     async UpdateProduct(req, res) {
-
-
         if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({    
                 message: "Product not found",
             });
         }
 
-
         try {
-
             // Atualizar os campos que tiver no req.body
             const products = await ProductModel.findByIdAndUpdate(req.params.id,req.body,{new: true});
             res.status(200).json({
                 message: "Products altered successfully",
                 products: products,
+                success: true
             });
         } catch (error) {
             res.status(400).json({
                 message: "Error fetching products",
                 error: error,
+                success: false
             });
         }
     }
@@ -97,12 +94,13 @@ class ProductController {
             const product = await ProductModel.findByIdAndDelete(req.params.id);
             res.status(200).json({
                 message: "Product deleted successfully",
-                product: product,
+                success: true,
             });
         } catch (error) {
             res.status(400).json({
                 message: "Error deleting product",
                 error: error,
+                success: false,
             });
         }
     }

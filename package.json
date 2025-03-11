@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": " nodemon back/server.js"
+    "dev": "cross-env NODE_ENV=development nodemon back/server.js",
+    "build": "npm install && npm install --prefix front && npm run build --prefix front",
+    "start": "cross-env NODE_ENV=production node back/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,10 +21,13 @@
   },
   "homepage": "https://github.com/BSDO/product-store#readme",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongodb": "^6.14.2",
-    "mongoose": "^8.12.1"
+    "mongoose": "^8.12.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
