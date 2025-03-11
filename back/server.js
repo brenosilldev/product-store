@@ -4,28 +4,25 @@ import {dbConnection} from './config/db.js';
 import { router } from "./routes.js";
 import path from 'path'
 
-dotenv.config()
+dotenv.config();
 
-const app =  express();
-app.use(express.json())
-
+const app = express();
+const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-if(process.env.NODE_ENV === 'production') {
-    console
-    app.use(express.static(path.join(__dirname, '/front/dist')));
+app.use(express.json()); // allows us to accept JSON data in the req.body
 
+app.use("/v1", router);
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'front', 'dist', 'index.html'));    
-    })
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/front/dist")));
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "front", "dist", "index.html"));
+	});
 }
 
-app.use('/v1',router)
-
-app.listen(process.env.PORT || 5000, () => {
-    dbConnection();
-    console.log('Server started on port: ' + process.env.PORT); 
-
+app.listen(PORT, () => {
+	dbConnection();
+	console.log("Server started at http://localhost:" + PORT);
 });
