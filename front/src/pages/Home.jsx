@@ -28,7 +28,11 @@ export const Home = () => {
                 </Text>
 
                 {products.length > 0 ? (
-                    <SimpleGrid columns={[1, 2, 3]} spacing={10}>
+                    <SimpleGrid columns={{
+						base: 1,
+						md: 2,
+						lg: 3,
+					}} spacing={10} >
                         {products.map((product) => (
                             <ProductCard product={product} key={product._id} />
                         ))}

@@ -83,8 +83,8 @@ export const ProductCard = ({product,key}) => {
 
     return (
       
-        <Card maxW='sm' key={key} transition={"all 0.5s"} _hover={{transform: "translateY(-5px)",shadow: "xl"}}>
-            <CardBody>
+        <Card shadow={'lg'} rounded={'md'} overflow={'hidden'} maxW='sm' key={key} transition={"all 0.5s"} _hover={{transform: "translateY(-5px)",shadow: "xl"}}>
+            <CardBody size='md'>
                 <Image
                 src={product.image}
                     alt='Green double couch with wooden legs'
